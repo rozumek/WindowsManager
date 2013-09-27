@@ -17,6 +17,5 @@
             <File name="src\WindowManager.ahk" />
         </Folder>
         <File name="README.md" />
-        <File name="version.txt" />
     </Project>
 </NotepadPlus>

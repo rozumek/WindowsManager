@@ -93,6 +93,9 @@
 		}
 	}
 	
+	/**
+	 * Namespace zarządzajacy Configiem
+	 */
 	class Config {		
 		/**
 		 * tablica zmiennych konfiguracyjnych

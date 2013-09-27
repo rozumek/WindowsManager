@@ -1,7 +1,7 @@
 ﻿/**
  * ======================================================
  * Skrypt zarządzający przeglądarką
- * Wersja: 1.0
+ * Wersja: 1.0 RC
  * Autor: marcin.wyrozumski@esky.pl
  * ======================================================
  */
@@ -26,13 +26,24 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
 /**
  * ================================================================================
  */
- 
+
 /**
  * ================================================================================
  * Boostrap - początkowe komendy
  * ================================================================================
  */
+
  
+ /**
+  * ================================================================================
+  * Ustawienie wersji
+  * ================================================================================
+  */
+global version := "1.0 RC"
+ /* 
+  * ================================================================================
+  */
+
 ; pobranie konfiga aplikacji
 global config := Rico.Config.LoadFromIni(A_ScriptDir . "\config\main.ini")
  
@@ -43,7 +54,7 @@ global browsers := KvalSky.Enum.Browsers
 global programs := KvalSky.Enum.Programs
  
 ; pokazanie ikony tray'a
-Private.App.Tray.ShowTip("Windows Manager", "See Wiki for help")
+Private.App.Tray.ShowTip("Windows Manager" . version, "See Wiki for help")
 
 ; zarejestrowanie standarowyk klawiszy funkcyjnych
 config.SetSection("functions")
