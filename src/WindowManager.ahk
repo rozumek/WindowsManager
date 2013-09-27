@@ -33,8 +33,8 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
  * ================================================================================
  */
  
-; definiowanie nazwy usera
-global username = "Marcin Wyrozumski"
+; pobranie konfiga aplikacji
+global config := Rico.Config.LoadFromIni(A_ScriptDir . "\config\main.ini")
  
 ; przeglądarki
 global browsers := KvalSky.Enum.Browsers
@@ -44,6 +44,14 @@ global programs := KvalSky.Enum.Programs
  
 ; pokazanie ikony tray'a
 Private.App.Tray.ShowTip("Windows Manager", "See Wiki for help")
+
+; zarejestrowanie standarowyk klawiszy funkcyjnych
+config.SetSection("functions")
+
+Rico.Loader.RegisterHotKey(config.Get("reload.hotkey", "#r"), "manager_realod")
+Rico.Loader.RegisterHotKey(config.Get("goto.hotkey","#a"), "manager_goto")
+Rico.Loader.RegisterHotKey(config.Get("cursor.hotkey","#w"), "manager_cursor")
+Rico.Loader.RegisterHotKey(config.Get("pwc.hotkey","#q"), "manager_pwc")
 
 /**
  * ================================================================================
@@ -55,12 +63,14 @@ Private.App.Tray.ShowTip("Windows Manager", "See Wiki for help")
  * Konfiguracja klawiszy: Windows + R + (F|X|C)
  * ================================================================================
  */
-#r::
+manager_realod:
+	config.SetSection("browsers")
+	
 	map := Object()
-	map["#f"] := "reload_firefox"
-	map["#x"] := "reload_opera"
-	map["#c"] := "reload_chrome"
-	map["#d"] := "reload_ie"
+	map[config.Get("firefox.hotkey","#f")] := "reload_firefox"
+	map[config.Get("opera.hotkey","#x")] := "reload_opera"
+	map[config.Get("chrome.hotkey","#c")] := "reload_chrome"
+	map[config.Get("ie.hotkey","#d")] := "reload_ie"
 	
 	Rico.Loader.RegisterHotKeysAndWaitForAction(map)
 return
@@ -75,18 +85,20 @@ return
  * Konfiguracja klawiszy: Windows + A + (F|X|C|T|N|S|E)
  * ===============================================================================
  */
-#a::
+manager_goto:
+	config.SetSection("programs")
+	
 	map := Object()
-	map["#f"] := "goto_firefox"
-	map["#x"] := "goto_opera"
-	map["#c"] := "goto_chrome"
-	map["#t"] := "goto_commander"
-	map["#n"] := "goto_notepadpp"
-	map["#s"] := "goto_skype"
-	map["#e"] := "goto_ide"
-	map["#m"] := "goto_outlock"
-	map["#d"] := "goto_ie"
-	map["#z"] := "goto_putty"
+	map[config.Get("firefox.hotkey","#f")] := "goto_firefox"
+	map[config.Get("opera.hotkey","#x")] := "goto_opera"
+	map[config.Get("chrome.hotkey","#c")] := "goto_chrome"
+	map[config.Get("commender.hotkey","#t")] := "goto_commander"
+	map[config.Get("notepadpp.hotkey","#n")] := "goto_notepadpp"
+	map[config.Get("skype.hotkey","#s")] := "goto_skype"
+	map[config.Get("ide.hotkey","#e")] := "goto_ide"
+	map[config.Get("outlook.hotkey","#m")] := "goto_outlook"
+	map[config.Get("ie.hotkey","#d")] := "goto_ie"
+	map[config.Get("putty.hotkey","#z")] := "goto_putty"
 	
 	Rico.Loader.RegisterHotKeysAndWaitForAction(map)
 return
@@ -101,10 +113,12 @@ return
  * Konfiguracja klawiszy: Alt + Windows + W + (1|2)
  * ===============================================================================
  */
-#w::
+manager_cursor:
+	config.SetSection("cursor")
+
 	map := Object()
-	map["#1"] := "goto_left_screen"
-	map["#2"] := "goto_right_screen"
+	map[config.Get("goto_left_screen.hotkey","#1")] := "goto_left_screen"
+	map[config.Get("goto_right_screen.hotkey","#2")] := "goto_right_screen"
 	
 	Rico.Loader.RegisterHotKeysAndWaitForAction(map)
 return
@@ -119,10 +133,12 @@ return
  * Konfiguracja klawiszy: Windows + Q + 
  * ===============================================================================
  */
-#q::
+manager_pwc:
+	config.SetSection("pwc")
+
 	map := Object()
-	map["#c"] := "insert_pwc_comment"	
-	map["#b"] := "show_actions_box"
+	map[config.Get("insert_pwc_comment.hotkey","#c")] := "insert_pwc_comment"	
+	map[config.Get("show_actions_box.hotkey","#b")] := "show_actions_box"
 	
 	Rico.Loader.RegisterHotKeysAndWaitForAction(map)
 return
@@ -184,12 +200,12 @@ goto_ide:
 	Rico.Window.GotoWindow(programs["phpstorm"]["exe"], true, false)
 return
 
-goto_outlock:
+goto_outlook:
 	Rico.Window.GotoWindow(programs["outlook"]["exe"], true, false)
 return
 
 goto_putty:
-	Rico.Window.GotoWindow(programs["putty"]["exe"], true)
+	Rico.Window.GotoWindow(programs["putty"]["exe"], true, false)
 return
 
 goto_left_screen:
@@ -201,6 +217,9 @@ goto_right_screen:
 return
 
 insert_pwc_comment:
+	config.SetSection("general")
+	username := config.Get("username", "User")
+
 	PrintPwcAdditionalInfoComment(username)
 return
 

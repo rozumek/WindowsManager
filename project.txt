@@ -1,0 +1,22 @@
+<NotepadPlus>
+    <Project name="WindowsManager 1.0">
+        <Folder name="src">
+            <Folder name="config">
+                <File name="src\config\main.ini" />
+            </Folder>
+            <Folder name="data">
+                <File name="src\data\commands.txt" />
+            </Folder>
+            <Folder name="library">
+                <File name="src\library\functions.ahk" />
+                <File name="src\library\KvalSky.ahk" />
+                <File name="src\library\Private.ahk" />
+                <File name="src\library\Rico.ahk" />
+                <File name="src\library\Skipper.ahk" />
+            </Folder>
+            <File name="src\WindowManager.ahk" />
+        </Folder>
+        <File name="README.md" />
+        <File name="version.txt" />
+    </Project>
+</NotepadPlus>

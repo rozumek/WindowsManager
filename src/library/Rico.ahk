@@ -93,8 +93,99 @@
 		}
 	}
 	
-	class Config {
+	class Config {		
+		/**
+		 * tablica zmiennych konfiguracyjnych
+		 *
+		 * @return array
+		 */
+		Config := ""
+	
+		/**
+		 * Nazwa pliku z konfiguracją
+		 *
+		 * @var string
+		 */
+		FileName := ""
+	
+		/**
+		 * Zwraca sekcje z pliku Ini
+		 *
+		 * @return this
+		 */
+		Section := ""
+	
+		/**
+		 * Pobiera konfiguracje z pliku
+		 *
+		 * @retrun this
+		 */
+		LoadFromIni(FileName) {	
+			this.SetFileName(FileName)
+			
+			if(!Rico.File.Exist(this.FileName)) {
+				throw Exception("Configuration file: " . FileName " not exists", -1)
+			}
+			
+			return this
+		}
 		
+		/**
+		 * Ustawia sekcje z jakiej będa pobierane dane
+		 *
+		 * @retrun this
+		 */
+		SetSection(Section) {
+			this.Section := Section
+			return this
+		}			
+
+		/**
+		 * Zwraca nazwe pliku INI
+		 *
+		 * @retrun string
+		 */
+		GetFileName() {
+			return this.FileName
+		}
+		
+		/**
+		 * Ustawie nazwe pliku INI
+		 *
+		 * @retrun this
+		 */
+		SetFileName(FileName) {
+			this.FileName := FileName
+			return this
+		}			
+
+		/**
+		 * Zwraca nazwe sekcji z jakiej beda pobierane dane
+		 *
+		 * @retrun string
+		 */
+		GetSection() {
+			return this.Section
+		}
+		
+		/**
+		 * Pobiera zmienna konfiguracyjna
+		 *
+		 * @param string Key
+		 * @param mixed Default
+		 * @retrun string
+		 */
+		Get(Key, Default:="") {
+			Section := this.GetSection()
+			FileName := this.GetFileName()
+			IniRead, ConfigVar, %FileName%, %Section%, %Key%, %Default%
+			
+			return ConfigVar
+		}
+		
+		ToArray() {
+			
+		}
 	}
 	
 	/**
@@ -150,6 +241,13 @@
 		FileLines := Object()
 		
 		/**
+		 * Surowa zawartość pliku
+		 *
+		 * @var string
+		 */
+		FileContent := ""
+		
+		/**
 		 * Ustawia nazwe pliku
 		 *
 		 * @param string FileName
@@ -167,6 +265,33 @@
 		 */
 		GetFileName() {
 			return this.FileName
+		}	
+
+		/**
+		 * Sprawdza czy plik istnieje
+		 *
+		 * @return bool
+		 */
+		Exist(FileName) {
+			if(FileExist(FileName)) {
+				return true
+			} else {
+				return false
+			}
+		}
+		
+		/**
+		 * Pobiera surową zawartość pliku
+		 *
+		 * @return string
+		 */
+		ReadContent(FileName) {
+			if(this.Exist(FileName)) {
+				FileRead, FileContent, %FileName%				
+				return FileContent
+			}
+			
+			return ""
 		}
 		
 		/**

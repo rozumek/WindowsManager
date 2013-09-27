@@ -1,18 +1,19 @@
-Deploy Pre;sudo /autodeploy/autodeploy deploy ibe20B ibe20B IBE20 test /autodeploy/be1_be2_be3.conf
-Deploy Pre Services;sudo /autodeploy/autodeploy deploy services services SERV test /autodeploy/be1_be2_be3.conf
-Deploy Prod;sudo /autodeploy/autodeploy simple_deploy /wwwdocs/http/ibe20/nazwa_pliku ibe20B onet:onet /autodeploy/be1_be2_be3_be4.conf
-Deploy Prod BR;sudo /autodeploy/autodeploy simple_deploy /wwwdocs/http/ibe20/nazwa_pliku ibe20A esky:esky /autodeploy/brasil.conf
-Deploy Prod Services;sudo /autodeploy/autodeploy simple_deploy /wwwdocs/http/services/nazwa_pliku services services:services /autodeploy/be1_be2_be3_be4.conf
+Deploy ALL IBE;sudo /autodeploy/autodeploy deploy ibe20B ibe20B IBE20 test /autodeploy/be1_be2_be3.conf
+Deploy ALL IBE;sudo /autodeploy/autodeploy deploy ibe20B ibe20B IBE20 test /autodeploy/brasil.conf
+Deploy ALL Services;sudo /autodeploy/autodeploy deploy services services SERV test /autodeploy/be1_be2_be3.conf
+Deploy 1 plik IBE;sudo /autodeploy/autodeploy simple_deploy /wwwdocs/http/ibe20/nazwa_pliku ibe20B onet:onet /autodeploy/be1_be2_be3_be4.conf
+Deploy 1 plik BR;sudo /autodeploy/autodeploy simple_deploy /wwwdocs/http/ibe20/nazwa_pliku ibe20A esky:esky /autodeploy/brasil.conf
+Deploy 1 plik Services;sudo /autodeploy/autodeploy simple_deploy /wwwdocs/http/services/nazwa_pliku services services:services /autodeploy/be1_be2_be3_be4.conf
 Start Solr;sudo /etc/init.d/jetty start
 Stop Solr;sudo /etc/init.d/jetty stop
 Restart Solr;sudo /etc/init.d/jetty restart
-Czyszczenie Varnisha;sudo ./varnish_cleaner.sh "http://eskyservices.pl.preesky.pl" all
-Grepowanie po accesslogu;cat /usr/local/nginx/logs/access.log | grep "28/Jan/2013:08:3" | grep "10.2.0.48" | grep "192.168.105.80" | grep -vE "common|public|packed|images|et.php|OD|IBE"
+Czyszczenie Varnisha PRE;sudo ./varnish_cleaner.sh "http://eskyservices.pl.preesky.pl" all
+Czyszczenie Varnisha PRO;sudo ./varnish_cleaner.sh "http://eskyservices.pl" all
 Reindeksacja solara;http://192.168.1.221:8080/solr/dataimport?command=full-import
 Status akcji solara;http://192.168.1.221:8080/solr/dataimport?command=status
 Admnin solara;http://192.168.1.221:8080/solr/admin/
-Czyszczenie memcache'a PRE;http://esky.wp.pl.preesky.pl/tools/memcache.php?cmd=flush
-Czyszczenie memcache'a DEV;http://192.168.1.241:9090/solr/dataimport?command=status`
+Czyszczenie memcache'a PRO;http://www.esky.pl/tools/memcache.php?cmd=flush
 activeMQ PRE;http://10.2.0.40:8161/admin/queues.jsp
 activeMQ PRO;http://10.1.0.40:8161/admin/queues.jsp
-£adowanie t³umaczeñ dla AT (na BE0);php -f trans_load.php
+£adowanie t³umaczeñ z pliku dla AT (na BE0);php -f trans_load.php
+Synchronizacja t³umaczeñ;php -f translations_sync.php -- admin1234 preproductionenv production
