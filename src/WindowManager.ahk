@@ -1,7 +1,7 @@
 ﻿/**
  * ======================================================
  * Skrypt zarządzający przeglądarką
- * Wersja: 1.0 RC
+ * Wersja: 1.0.1 Aplha
  * Autor: marcin.wyrozumski@esky.pl
  * ======================================================
  */
@@ -39,7 +39,7 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
   * Ustawienie wersji
   * ================================================================================
   */
-global version := "1.0 RC"
+global version := "1.0.1 Aplha"
  /* 
   * ================================================================================
   */
