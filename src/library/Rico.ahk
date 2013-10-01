@@ -123,8 +123,9 @@
 		 *
 		 * @retrun this
 		 */
-		LoadFromIni(FileName) {	
+		LoadFromIni(FileName, DefaultSection) {	
 			this.SetFileName(FileName)
+			this.SetSection(DefaultSection)
 			
 			if(!Rico.File.Exist(this.FileName)) {
 				throw Exception("Configuration file: " . FileName " not exists", -1)
@@ -132,7 +133,7 @@
 			
 			return this
 		}
-		
+					
 		/**
 		 * Ustawia sekcje z jakiej będa pobierane dane
 		 *

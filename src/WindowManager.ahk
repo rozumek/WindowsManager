@@ -45,7 +45,7 @@ global version := "1.0 RC"
   */
 
 ; pobranie konfiga aplikacji
-global config := Rico.Config.LoadFromIni(A_ScriptDir . "\config\main.ini")
+global config := Rico.Config.LoadFromIni(A_ScriptDir . "\config\main.ini", "general")
  
 ; przeglądarki
 global browsers := KvalSky.Enum.Browsers
