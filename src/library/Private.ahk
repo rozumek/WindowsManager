@@ -59,7 +59,7 @@
 			 *
 			 * @var string
 			 */
-			static CloseConfirmEnable := true
+			static CloseConfirmEnable := true			
 			
 			/**
 			 * Metoda ustawiajaca etykiete dla eventów
@@ -154,6 +154,13 @@
 			 *
 			 */
 			static ValueRowNumber := 1
+			
+			/**
+			 * Komunikat ze nalezy wybrac okno
+			 *
+			 * @var string
+			 */
+			static SelectionErrorText := "Choose a row to copy"
 			
 			/**
 			 * Szerorkosc okna
@@ -324,7 +331,7 @@
 			 * @param int Column
 			 * @return string
 			 */	
-			GetSelectedRowValue(Column:=1) {				
+			GetSelectedRowValue(Column:=1) {
 				RowNumber := Private.Gui.ListView.GetSelectedRowNumber()							
 				LV_GetText(RowValue, RowNumber, Column)
 				
@@ -341,20 +348,25 @@
 				 * Kopiowanie do schowka bierzącej wartosci
 				 */
 				gui_listview_copy_action:
-					if (WinActive("ahk_class AutoHotkeyGUI")) {						
-						RowText := Private.Gui.ListView.GetSelectedRowValue(Private.Gui.ListView.ValueRowNumber)
-						Clipboard = %RowText%
-						
-						if (Private.Gui.ListView.CloseConfirmEnable){
-							CloseConfirmation := Private.Gui.ListView.CloseMessage
-							MsgBox, 4, , %RowText% %CloseConfirmation%
+					if (WinActive("ahk_class AutoHotkeyGUI")) {		
+						if(Private.Gui.ListView.GetSelectedRowNumber() > 0){							
+							RowText := Private.Gui.ListView.GetSelectedRowValue(Private.Gui.ListView.ValueRowNumber)
+							Clipboard = %RowText%
 							
-							IfMsgBox Yes  
-							{
-								Private.Gui.ListView.Destroy()
+							if (Private.Gui.ListView.CloseConfirmEnable){
+								CloseConfirmation := Private.Gui.ListView.CloseMessage
+								MsgBox, 4, , %RowText% %CloseConfirmation%
+								
+								IfMsgBox Yes  
+								{
+									Private.Gui.ListView.Destroy()
+								}
+							} else {
+								MsgBox %RowText%
 							}
 						} else {
-							MsgBox %RowText%
+							SelectionErrorText := Private.Gui.ListView.SelectionErrorText
+							MsgBox %SelectionErrorText%					
 						}
 					}
 				return 
