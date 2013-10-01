@@ -164,7 +164,7 @@ return
  * ===============================================================================
  */
 reload_firefox: 
-	Rico.Window.RefreshBrowser(browsers["firefox"]["exe"])
+	Rico.Window.RefreshBrowser(browsers["firefox"]["exe"], true)
 return
  
 reload_opera:
@@ -172,11 +172,11 @@ reload_opera:
 return
 
 reload_chrome:
-	Rico.Window.RefreshBrowser(browsers["chrome"]["exe"])
+	Rico.Window.RefreshBrowser(browsers["chrome"]["exe"], true)
 return 
 
 reload_ie:
-	Rico.Window.RefreshBrowser(browsers["ie"]["exe"], true)
+	Rico.Window.RefreshBrowser(browsers["ie"]["exe"])
 return 
 
 goto_firefox:
@@ -192,7 +192,7 @@ goto_chrome:
 return 
 
 goto_ie:
-	Rico.Window.GotoWindow(browsers["ie"]["exe"])
+	Rico.Window.GotoWindow(browsers["ie"]["exe"], true)
 return
 
 goto_commander:

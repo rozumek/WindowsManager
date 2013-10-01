@@ -440,8 +440,12 @@
 		/**
 		 * Funkcja przeładowujaca stronę
 		 */
-		ReloadPage() {
+		ReloadPage(autoAccept := false) {
 			Send ^r	
+			
+			if(autoAccept == true) {				
+				Send {Enter}
+			}
 		}
 
 		/**
@@ -449,9 +453,9 @@
 		 *
 		 * @param string browser
 		 */
-		RefreshBrowser(window) {
+		RefreshBrowser(window, autoAccept := false) {
 			if this.GotoWindow(window) {
-				this.ReloadPage()
+				this.ReloadPage(autoAccept)
 			}
 		}
 
