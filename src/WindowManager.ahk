@@ -252,7 +252,8 @@ return
 action_box_events:
 	if A_GuiEvent = DoubleClick 
 	{
-		;TODO IMPLEMENT
+		SelectedRowText := Private.Gui.ListView.CopySelectedValueToClipboard()
+		MsgBox %SelectedRowText%		
 	}
 	
 return

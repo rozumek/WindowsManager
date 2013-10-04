@@ -338,6 +338,13 @@
 				return RowValue
 			}
 			
+			CopySelectedValueToClipboard() {
+				RowText := Private.Gui.ListView.GetSelectedRowValue(Private.Gui.ListView.ValueRowNumber)
+				Clipboard = %RowText%
+				
+				return RowText
+			}
+			
 			/**
 			 * Metoda przechowuje wszystki makra dla eventów, nie powinn abyć wywołana
 			 */
@@ -350,8 +357,7 @@
 				gui_listview_copy_action:
 					if (WinActive("ahk_class AutoHotkeyGUI")) {		
 						if(Private.Gui.ListView.GetSelectedRowNumber() > 0){							
-							RowText := Private.Gui.ListView.GetSelectedRowValue(Private.Gui.ListView.ValueRowNumber)
-							Clipboard = %RowText%
+							RowText := Private.Gui.ListView.CopySelectedValueToClipboard()							
 							
 							if (Private.Gui.ListView.CloseConfirmEnable){
 								CloseConfirmation := Private.Gui.ListView.CloseMessage
