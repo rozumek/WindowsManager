@@ -204,7 +204,7 @@ goto_notepadpp:
 return
 
 goto_skype:
-	Rico.Window.GotoWindow(programs["skype"]["exe"], true, false)
+	Rico.Window.GotoWindow(programs["skype"]["exe"], false, false)
 return
 
 goto_ide:
