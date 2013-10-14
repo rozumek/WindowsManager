@@ -39,7 +39,7 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
   * Ustawienie wersji
   * ================================================================================
   */
-global version := "1.0.1 Aplha"
+global version := "1.0.1 Beta"
  /* 
   * ================================================================================
   */
@@ -54,7 +54,7 @@ global browsers := KvalSky.Enum.Browsers
 global programs := KvalSky.Enum.Programs
  
 ; pokazanie ikony tray'a
-Private.App.Tray.ShowTip("Windows Manager" . version, "See Wiki for help")
+Private.App.Tray.ShowTip("Windows Manager " . version, "See Wiki for help")
 
 ; zarejestrowanie standarowyk klawiszy funkcyjnych
 config.SetSection("functions")
