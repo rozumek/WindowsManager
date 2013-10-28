@@ -228,7 +228,7 @@
 				if (monitorId = 2) {										
 					MouseMove, rightMonitorCenterX, rightMonitorCenterY
 				} else if(monitorId = 1) {					
-					MouseMove, MonitorRRight+leftMonitorCenterX, leftMonitorCenterY
+					MouseMove, -leftMonitorCenterX, leftMonitorCenterY
 				}
 			}
 		}
