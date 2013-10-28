@@ -39,7 +39,7 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
   * Ustawienie wersji
   * ================================================================================
   */
-global version := "1.0.1"
+global version := "1.0.2 Alpha"
  /* 
   * ================================================================================
   */
@@ -59,7 +59,7 @@ Private.App.Tray.ShowTip("Windows Manager " . version, "See Wiki for help")
 ; zarejestrowanie standarowyk klawiszy funkcyjnych
 config.SetSection("functions")
 
-Rico.Loader.RegisterHotKey(config.Get("reload.hotkey", "#r"), "manager_realod")
+Rico.Loader.RegisterHotKey(config.Get("reload.hotkey", "#r"), "manager_relaod")
 Rico.Loader.RegisterHotKey(config.Get("goto.hotkey","#a"), "manager_goto")
 Rico.Loader.RegisterHotKey(config.Get("cursor.hotkey","#w"), "manager_cursor")
 Rico.Loader.RegisterHotKey(config.Get("pwc.hotkey","#q"), "manager_pwc")
@@ -74,7 +74,7 @@ Rico.Loader.RegisterHotKey(config.Get("pwc.hotkey","#q"), "manager_pwc")
  * Konfiguracja klawiszy: Windows + R + (F|X|C)
  * ================================================================================
  */
-manager_realod:
+manager_relaod:
 	config.SetSection("browsers")
 	
 	map := Object()
@@ -164,59 +164,86 @@ return
  * ===============================================================================
  */
 reload_firefox: 
-	Rico.Window.RefreshBrowser(browsers["firefox"]["exe"], true)
+	config.SetSection("browsers")
+	
+	Rico.Window.RefreshBrowser(browsers["firefox"]["exe"], config.Get("firefox.autoaccept", true))
 return
  
 reload_opera:
-	Rico.Window.RefreshBrowser(browsers["opera"]["exe"])
+	config.SetSection("browsers")
+	
+	Rico.Window.RefreshBrowser(browsers["opera"]["exe"], config.Get("opera.autoaccept", false))
 return
 
 reload_chrome:
-	Rico.Window.RefreshBrowser(browsers["chrome"]["exe"], true)
+	config.SetSection("browsers")
+	
+	Rico.Window.RefreshBrowser(browsers["chrome"]["exe"], config.Get("chrome.autoaccept", true))
 return 
 
 reload_ie:
-	Rico.Window.RefreshBrowser(browsers["ie"]["exe"])
+	config.SetSection("browsers")
+	
+	Rico.Window.RefreshBrowser(browsers["ie"]["exe"], config.Get("ie.autoaccept", true))
 return 
 
 goto_firefox:
-	Rico.Window.GotoWindow(browsers["firefox"]["exe"])
+	config.SetSection("browsers")
+	
+	Rico.Window.GotoWindow(browsers["firefox"]["exe"], config.Get("firefox.extended", false), config.Get("firefox.maximize", true))
 return
  
 goto_opera:
-	Rico.Window.GotoWindow(browsers["opera"]["exe"])
+	config.SetSection("browsers")
+	
+	Rico.Window.GotoWindow(browsers["opera"]["exe"], config.Get("opera.extended", false), config.Get("opera.maximize", true))
 return
 
 goto_chrome:
-	Rico.Window.GotoWindow(browsers["chrome"]["exe"], true, false)
+	config.SetSection("browsers")
+	
+	Rico.Window.GotoWindow(browsers["chrome"]["exe"], config.Get("chrome.extended", true), config.Get("chrome.maximize", false))
 return 
 
 goto_ie:
-	Rico.Window.GotoWindow(browsers["ie"]["exe"], true)
+	config.SetSection("browsers")
+	Rico.Window.GotoWindow(browsers["ie"]["exe"], config.Get("ie.extended", true), config.Get("ie.maximize", true))
 return
 
 goto_commander:
-	Rico.Window.GotoWindow(programs["commander"]["exe"])
+	config.SetSection("programs")
+	
+	Rico.Window.GotoWindow(programs["commander"]["exe"], config.Get("commander.extended", false), config.Get("commander.maximize", true))
 return
 
 goto_notepadpp:
-	Rico.Window.GotoWindow(programs["notepadpp"]["exe"])
+	config.SetSection("programs")
+	
+	Rico.Window.GotoWindow(programs["notepadpp"]["exe"], config.Get("notepadpp.extended", false), config.Get("notepadpp.maximize", true))
 return
 
 goto_skype:
-	Rico.Window.GotoWindow(programs["skype"]["exe"], false, false)
+	config.SetSection("programs")
+	
+	Rico.Window.GotoWindow(programs["skype"]["exe"], config.Get("skype.extended", false), config.Get("skype.maximize", false))
 return
 
 goto_ide:
-	Rico.Window.GotoWindow(programs["phpstorm"]["exe"], true, false)
+	config.SetSection("programs")
+	
+	Rico.Window.GotoWindow(programs["phpstorm"]["exe"], config.Get("phpstorm.extended", true), config.Get("phpstorm.maximize", false))
 return
 
 goto_outlook:
-	Rico.Window.GotoWindow(programs["outlook"]["exe"], true, false)
+	config.SetSection("programs")
+	
+	Rico.Window.GotoWindow(programs["outlook"]["exe"], config.Get("outlook.extended", true), config.Get("outlook.maximize", false))
 return
 
 goto_putty:
-	Rico.Window.GotoWindow(programs["putty"]["exe"], true, false)
+	config.SetSection("programs")
+	
+	Rico.Window.GotoWindow(programs["putty"]["exe"], config.Get("putty.extended", true), config.Get("putty.maximize", false))
 return
 
 goto_left_screen:

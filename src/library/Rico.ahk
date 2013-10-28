@@ -28,9 +28,9 @@
 		 * @param mixed|string default
 		 * @return mixed
 		 */
-		Get(inputArray, key, defaultValue := "") {
+		Get(inputArray, key, defaultValue := "") {		
 			if (this.KeyExist(key, inputArray)) {
-				return array[key]
+				return inputArray[key]
 			}
 			
 			return defaultValue
@@ -177,13 +177,24 @@
 		 *
 		 * @param string Key
 		 * @param mixed Default
-		 * @retrun string
+		 * @retrun string|bool
 		 */
 		Get(Key, Default:="") {
 			Section := this.GetSection()
 			FileName := this.GetFileName()
 			IniRead, ConfigVar, %FileName%, %Section%, %Key%, %Default%
 			
+			/**
+			 * Issue[21] Main.ini does not work properly
+			 *
+			 * Boolean values processing
+			 */
+			if (ConfigVar == "true") {
+				ConfigVar := true
+			} else if (ConfigVar == "false") {
+				ConfigVar := false
+			}
+
 			return ConfigVar
 		}
 		
@@ -206,21 +217,18 @@
 			
 			if (MonitorCount > 1) {
 				CoordMode, Mouse, Screen
+				SysGet, MonitorR, Monitor, 1
+				SysGet, MonitorL, Monitor, 2
 				
-				if (monitorId = 2) {
-					SysGet, Monitor, Monitor, 1
-					
-					rightMonitorCenterX := (MonitorRight - MonitorLeft)/2
-					rightMonitorCenterY := (MonitorBottom - MonitorTop)/2
-					
+				rightMonitorCenterX := (MonitorRRight - MonitorRLeft)/2
+				rightMonitorCenterY := (MonitorRBottom - MonitorRTop)/2
+				leftMonitorCenterX := (MonitorLRight - MonitorLLeft)/2
+				leftMonitorCenterY := (MonitorLBottom - MonitorLTop)/2
+			
+				if (monitorId = 2) {										
 					MouseMove, rightMonitorCenterX, rightMonitorCenterY
-				} else if(monitorId = 1) {
-					SysGet, Monitor, Monitor, 2
-					
-					leftMonitorCenterX := (MonitorRight - MonitorLeft)/2
-					leftMonitorCenterY := (MonitorBottom - MonitorTop)/2
-				
-					MouseMove, -leftMonitorCenterX, leftMonitorCenterY
+				} else if(monitorId = 1) {					
+					MouseMove, MonitorRRight+leftMonitorCenterX, leftMonitorCenterY
 				}
 			}
 		}
