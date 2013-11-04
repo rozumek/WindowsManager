@@ -64,6 +64,10 @@ Rico.Loader.RegisterHotKey(config.Get("goto.hotkey","#a"), "manager_goto")
 Rico.Loader.RegisterHotKey(config.Get("cursor.hotkey","#w"), "manager_cursor")
 Rico.Loader.RegisterHotKey(config.Get("pwc.hotkey","#q"), "manager_pwc")
 
+; ustawienie pozycji monitora głównego domyślnnie lewy
+config.SetSection("cursor")
+Rico.Window.SetMainScreenPosition(config.Get("main_screen_position", "left"))
+
 /**
  * ================================================================================
  */
@@ -253,7 +257,7 @@ goto_tortoise:
 	Rico.Window.GotoWindow(programs["tortoise"]["class"], config.Get("tortoise.extended", true), config.Get("tortoise.maximize", false), "ahk_class")
 return
 
-goto_left_screen:
+goto_left_screen:	
 	Rico.Cursor.MoveToMonitor(1)
 return
 

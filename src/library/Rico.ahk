@@ -207,6 +207,7 @@
 	 * Namespace zarządzający kursorem myszy
 	 */
 	class Cursor {
+		
 		/**
 		 * Funkcja przenoci kursor na wybrani monitor
 		 *
@@ -217,18 +218,32 @@
 			
 			if (MonitorCount > 1) {
 				CoordMode, Mouse, Screen
-				SysGet, MonitorR, Monitor, 1
-				SysGet, MonitorL, Monitor, 2
+				
+				if (Rico.Window.GetMainScreenPosition() == "right") {
+					SysGet, MonitorR, Monitor, 1
+					SysGet, MonitorL, Monitor, 2
+				} else {
+					SysGet, MonitorR, Monitor, 2
+					SysGet, MonitorL, Monitor, 1
+				}
 				
 				rightMonitorCenterX := (MonitorRRight - MonitorRLeft)/2
 				rightMonitorCenterY := (MonitorRBottom - MonitorRTop)/2
 				leftMonitorCenterX := (MonitorLRight - MonitorLLeft)/2
 				leftMonitorCenterY := (MonitorLBottom - MonitorLTop)/2
 			
-				if (monitorId = 2) {										
-					MouseMove, rightMonitorCenterX, rightMonitorCenterY
-				} else if(monitorId = 1) {					
-					MouseMove, -leftMonitorCenterX, leftMonitorCenterY
+				if (monitorId = 2) {	
+					if (Rico.Window.GetMainScreenPosition() == "right") {
+						MouseMove, rightMonitorCenterX, rightMonitorCenterY
+					} else {
+						MouseMove, MonitorLRight + rightMonitorCenterX, rightMonitorCenterY
+					}
+				} else if(monitorId = 1) {		
+					if (Rico.Window.GetMainScreenPosition() == "right") {				
+						MouseMove, -leftMonitorCenterX, leftMonitorCenterY
+					} else {
+						MouseMove, leftMonitorCenterX, leftMonitorCenterY
+					}
 				}
 			}
 		}
@@ -445,6 +460,31 @@
 	 * Namespace zarzadzający oknami
 	 */
 	class Window {		
+		
+		/**
+		 * Position of main screen
+		 *
+		 * @var string
+		 */
+		static mainScreenPosition := "left"
+		
+		/**
+		 * Ustawia pozycje głównego monitora
+		 *
+		 * @param string
+		 */
+		SetMainScreenPosition(position) {
+			Rico.Cursor.mainScreenPosition := position	
+		}
+		
+		/**
+		 * Pobiera pozycje głównego monitora
+		 *
+		 * @return string
+		 */
+		GetMainScreenPosition() {
+			return Rico.Cursor.mainScreenPosition
+		}
 		
 		/**
 		 * Funkcja przeładowujaca stronę
