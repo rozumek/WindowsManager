@@ -484,20 +484,19 @@
 		 * @param string browser
 		 * @return bool
 		 */
-		GotoWindow(window, extended := false, forceMaximize := true) {
-			if WinExist("ahk_exe " . window){		
-				if (extended == true) {		
+		GotoWindow(window, extended := false, forceMaximize := true, ahkType := "ahk_exe") {
+			if WinExist(ahkType . " " . window){				
+				if (extended == true) {
 					WinGet, windowList, List	
-					WinGetClass, baseWindowClass, ahk_exe %window%
+					WinGetClass, baseWindowClass, %ahkType% %window%
 					
 					loop  %windowList%{
 						windowItem := windowList%A_Index%				
 						WinGetClass, windowClass, ahk_id%windowItem%								
-						
+													
 						if(windowClass == baseWindowClass) {	
 							WinGetTitle, windowTitle, ahk_id %windowItem%
 							WinGet windowId, ID, ahk_id %windowItem%
-											
 							
 							if(!WinActive("ahk_id " . windowId)) {						
 								WinActivate ahk_id %windowId%						
@@ -512,7 +511,7 @@
 						}
 					}		
 				} else {
-					if(!WinActive("ahk_exe " . window)) {
+					if(!WinActive(ahkType . " " . window)) {
 						WinActivate
 						WinGet maximized, MinMax, ahk_exe %window%				
 						

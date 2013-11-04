@@ -82,7 +82,7 @@
 		/**
 		 * Enum z informacjami programach
 		 */
-		static Programs := {commander : {exe : "TOTALCMD64.exe"}, putty : {exe : "putty.exe"}, outlook : {exe : "OUTLOOK.EXE"}, phpstorm : {exe : "PhpStorm.exe"}, skype :{exe : "Skype.exe"}, notepadpp : {exe : "notepad++.exe"}}				
+		static Programs := {commander : {exe : "TOTALCMD64.exe"}, putty : {exe : "putty.exe"}, outlook : {exe : "OUTLOOK.EXE"}, phpstorm : {exe : "PhpStorm.exe"}, skype :{exe : "Skype.exe"}, notepadpp : {exe : "notepad++.exe"}, tortoise :{exe : "", class : "#32770"}}				
 	}
 }
 

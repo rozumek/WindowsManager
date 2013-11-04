@@ -110,6 +110,7 @@ manager_goto:
 	map[config.Get("outlook.hotkey","#m")] := "goto_outlook"
 	map[config.Get("ie.hotkey","#d")] := "goto_ie"
 	map[config.Get("putty.hotkey","#z")] := "goto_putty"
+	map[config.Get("tortoise.hotkey","#v")] := "goto_tortoise"
 	
 	Rico.Loader.RegisterHotKeysAndWaitForAction(map)
 return
@@ -244,6 +245,12 @@ goto_putty:
 	config.SetSection("programs")
 	
 	Rico.Window.GotoWindow(programs["putty"]["exe"], config.Get("putty.extended", true), config.Get("putty.maximize", false))
+return
+
+goto_tortoise:
+	config.SetSection("programs")
+	
+	Rico.Window.GotoWindow(programs["tortoise"]["class"], config.Get("tortoise.extended", true), config.Get("tortoise.maximize", false), "ahk_class")
 return
 
 goto_left_screen:
