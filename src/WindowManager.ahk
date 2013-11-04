@@ -39,7 +39,7 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
   * Ustawienie wersji
   * ================================================================================
   */
-global version := "1.0.2 Alpha"
+global version := "1.0.2"
  /* 
   * ================================================================================
   */
