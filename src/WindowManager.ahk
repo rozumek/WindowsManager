@@ -235,8 +235,9 @@ return
 
 goto_ide:
 	config.SetSection("programs")
+	app := config.Get("ide.app", "phpstorm")
 	
-	Rico.Window.GotoWindow(programs["phpstorm"]["exe"], config.Get("phpstorm.extended", true), config.Get("phpstorm.maximize", false))
+	Rico.Window.GotoWindow(programs[app]["exe"], config.Get("ide.extended", true), config.Get("ide.maximize", false))
 return
 
 goto_outlook:
