@@ -39,7 +39,7 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
   * Ustawienie wersji
   * ================================================================================
   */
-global version := "1.0.2"
+global version := "1.1.0 Alpha"
  /* 
   * ================================================================================
   */
@@ -237,7 +237,11 @@ goto_ide:
 	config.SetSection("programs")
 	app := config.Get("ide.app", "phpstorm")
 	
-	Rico.Window.GotoWindow(programs[app]["exe"], config.Get("ide.extended", true), config.Get("ide.maximize", false))
+	if (!Rico.Array.InArray(app, programs)) {
+		MsgBox Uknown ide: %app%
+	} else {	
+		Rico.Window.GotoWindow(programs[app]["exe"], config.Get("ide.extended", true), config.Get("ide.maximize", false))
+	}
 return
 
 goto_outlook:
