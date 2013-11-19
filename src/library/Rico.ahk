@@ -91,6 +91,29 @@
 			
 			return false
 		}
+		
+		/**
+		 * Metoda łaczy 2 tabele w jedną
+		 *
+		 * @param mixed key
+		 * @param array array
+		 * @return bool
+		 */
+		Merge(array1, array2) {
+			arrayMerged := array1			
+			
+			for key, val in array2
+			{
+				if key is integer 
+				{
+					arrOffset := array1.MaxIndex()
+					key += arrOffset
+				}
+				arrayMerged[key] := val
+			}
+			
+			return arrayMerged
+		}
 	}
 	
 	/**
@@ -198,8 +221,42 @@
 			return ConfigVar
 		}
 		
-		ToArray() {
+		/**
+		 * Pobiera konfiguracje z sekcji i zwraca jako tablice
+		 *
+		 * @param string section
+		 * @retrun array
+		 */
+		GetSectionValues(section) {
+			ArrayConfig := Object()
+			FileName := this.FileName
+			IniRead, configRaw, %FileName%, %section%
+							
+			loop, parse, configRaw, `n, `r
+			{
+				StringSplit, config, A_LoopField, =, ""
+				ArrayConfig[config1] := config2	
+			}
 			
+			return ArrayConfig
+		}
+		
+		/**
+		 * Pobiera konfiguracje i zwraca jako tablice
+		 *
+		 * @retrun array
+		 */
+		ToArray() {
+			ArrayConfig := Object()
+			FileName := this.FileName
+			IniRead, sections, %FileName%					
+			
+			loop, parse, sections, `n, `r
+			{
+				ArrayConfig := Rico.Array.Merge(ArrayConfig, this.GetSectionValues(A_LoopField))
+			}
+			
+			return ArrayConfig
 		}
 	}
 	
@@ -453,6 +510,27 @@
 			Sleep, %waitTime%
 			
 			this.UnRegisterHotKeys(map)
+		}
+	}
+	
+	/**
+	 * Namespace zarzadzający stringami
+	 */
+	class String {
+	
+		/**
+		 * Zwraca tablice elementów ze stringa złaczonych przy pomocy glue
+		 *
+		 * @param string glue
+		 * @param string string
+		 * @return array
+		 */
+		Explode(glue, string, ommitChars = "") {
+			arrayExploded := Object()
+			arrayResult := Object()
+			StringSplit, arrayExploded, string, %glue%
+			
+			return arrayExploded
 		}
 	}
 		
