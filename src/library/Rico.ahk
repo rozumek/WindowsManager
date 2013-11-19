@@ -525,12 +525,61 @@
 		 * @param string string
 		 * @return array
 		 */
-		Explode(glue, string, ommitChars = "") {
+		Split(string, glue) {
 			arrayExploded := Object()
 			arrayResult := Object()
 			StringSplit, arrayExploded, string, %glue%
 			
-			return arrayExploded
+			loop, %arrayExploded0%
+			{
+				arrayResult[A_Index] := arrayExploded%A_Index%				
+			}
+			
+			return arrayResult
+		}
+		
+		/**
+		 * Zwraca długośc string'a
+		 *
+		 * @param string string
+		 * @return int
+		 */
+		Length(string) {
+			StringLen, length, string			
+			return length
+		}
+		
+		/**
+		 * Małe litery
+		 *
+		 * @param string string
+		 * @return string
+		 */
+		Lower(string) {
+			StringLower, loweredString, string			
+			return loweredString
+		}
+		
+		/**
+		 * Duże litery
+		 *
+		 * @param string string
+		 * @return string
+		 */
+		Upper(string) {
+			StringUpper, upperedString, string			
+			return upperedString
+		}
+		
+		/**
+		 * Zwraca długośc string'a
+		 *
+		 * @param string string
+		 * @return int
+		 */
+		Capitalize(string) {
+			StringUpper, capitalizedString, string, T			
+			return capitalizedString
 		}
 	}
 		
