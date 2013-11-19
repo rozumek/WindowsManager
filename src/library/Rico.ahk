@@ -44,7 +44,7 @@
 		 * @return bool
 		 */
 		InArray(needle, haystack) {
-			for index, value in  haystack {
+			for index, value in  haystack {			
 				if(value == needle) {
 					return true
 				}

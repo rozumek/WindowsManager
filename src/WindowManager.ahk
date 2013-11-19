@@ -243,7 +243,7 @@ goto_ide:
 	config.SetSection("programs")
 	app := config.Get("ide.app", "phpstorm")
 	
-	if (!Rico.Array.InArray(app, programs)) {
+	if (!Rico.Array.KeyExist(app, programs)) {
 		MsgBox Uknown ide: %app%
 	} else {	
 		Rico.Window.GotoWindow(programs[app]["exe"], config.Get("ide.extended", true), config.Get("ide.maximize", false))
