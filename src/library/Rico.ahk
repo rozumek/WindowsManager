@@ -1,6 +1,39 @@
 ﻿class Rico {
 
 	/**
+	 * Namespace z funkcjami aplikacji
+	 */
+	class App {
+	
+		/**
+		 * Zakończenie działania aplikacji
+		 *
+		 * @return void
+		 */
+		ExitApp() {
+			ExitApp
+		}
+		
+		/**
+		 * Reset aplikacji
+		 *
+		 * @return void
+		 */
+		ReloadApp() {
+			Reload
+		}
+		
+		/**
+		 * Uruchomienie procesu/aplikacji
+		 *
+		 * @return void
+		 */
+		Run(App) {
+			Run, %App%
+		}
+	}
+	
+	/**
 	 * Namespace z funkcjami tabel
 	 */
 	class Array {
@@ -510,7 +543,7 @@
 			Sleep, %waitTime%
 			
 			this.UnRegisterHotKeys(map)
-		}
+		}		
 	}
 	
 	/**

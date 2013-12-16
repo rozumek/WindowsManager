@@ -24,6 +24,78 @@
 				
 				return this
 			}
+			
+			class Menu {
+				
+				/**
+				 * Struktura menu
+				 *
+				 * @var array
+				 */
+				static MenuItems := {}
+				
+				/**
+				 * Struktura menu
+				 *
+				 * @var int
+				 */
+				static MenuItemsCount := 0
+				
+				/**
+				 * PObiera liczbe pozycji menu
+				 *
+				 * @return int
+				 */
+				GetMenuItemsCount() {
+					return Private.App.Tray.MenuItemsCount
+				}
+				
+				/**
+				 * PObiera tablice pozycji menu
+				 *
+				 * @return array
+				 */
+				GetMenuItems() {
+					return Private.App.Tray.MenuItems
+				}
+				
+				/**
+				 * Dodaje separator do menu
+				 *
+				 * @return this
+				 */
+				AddSeparatorLine() {
+					MenuItem := {Label : "Separator", Type : "Separator"}
+					Private.App.Tray.Menu.MenuItems[Private.App.Tray.Menu.MenuItemsCount] := MenuItem
+					Private.App.Tray.Menu.MenuItemsCount++
+					
+					Menu, Tray, Add 
+					return this
+				}
+				
+				/**
+				 * Dodaje pozycje do menu
+				 *
+				 * @return this
+				 */
+				AddMenuItem(Label, Handler) {
+					MenuItem := {Label : Label, Handler : Handler, Type : "Position"}
+					Private.App.Tray.Menu.MenuItems[Private.App.Tray.Menu.MenuItemsCount] := MenuItem
+					Private.App.Tray.Menu.MenuItemsCount++
+					
+					Menu, Tray, Add, %Label%, %Handler%
+					return this
+				}	
+
+				AddMenu(Label, Menu) {
+					MenuItem := {Label : Label, Handler : Menu, Type : "SubMenu"}
+					Private.App.Tray.Menu.MenuItems[Private.App.Tray.Menu.MenuItemsCount] := MenuItem
+					Private.App.Tray.Menu.MenuItemsCount++
+					
+					Menu, Tray, Add, %Label%, :%Menu%
+					return this
+				}
+			}
 		}
 	}
 	

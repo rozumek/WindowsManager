@@ -40,6 +40,8 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
   * ================================================================================
   */
 global version := "1.1.0 Alpha"
+global wiki = "https://github.com/rozumek/WindowsManager/wiki"
+global homepage = "https://github.com/rozumek/WindowsManager/wiki"
  /* 
   * ================================================================================
   */
@@ -61,6 +63,13 @@ global programs := KvalSky.Enum.Programs
  
 ; pokazanie ikony tray'a
 Private.App.Tray.ShowTip("Windows Manager " . version, "See Wiki for help")
+
+; menu tray'a
+Private.App.Tray.Menu
+	.AddSeparatorLine()	
+	.AddMenuItem("Restart Application", "restart_app")
+	.AddMenuItem("Wiki", "see_wiki")
+	.AddMenuItem("About ", "about_app")
 
 ; zarejestrowanie standarowyk klawiszy funkcyjnych
 config.SetSection("functions")
@@ -305,5 +314,20 @@ action_box_events:
 		MsgBox %SelectedRowText%		
 	}
 	
+return
+
+restart_app:
+	Rico.App.ReloadApp()	
+return
+
+see_wiki:
+	Rico.App.Run(wiki)
+return
+
+about_app:
+	config.SetSection("general")
+	appName := Config.Get("app_name") . " " . version . " - Open source"
+	
+	MsgBox, %appName%`n`nCreated by: `tMarcin Wyrozumski`nPowered by: `tAutoHotKey`nHomepage: `t%homepage%`n`nPlease Share It!!!
 return
 
