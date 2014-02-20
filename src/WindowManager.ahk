@@ -1,7 +1,7 @@
 ﻿/**
  * ======================================================
  * Skrypt zarządzający przeglądarką
- * Wersja: 1.0.1 Aplha
+ * Wersja: 1.1.1 Alpha
  * Autor: marcin.wyrozumski@esky.pl
  * ======================================================
  */
@@ -39,9 +39,9 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
   * Ustawienie wersji
   * ================================================================================
   */
-global version := "1.1.0"
-global wiki = "https://github.com/rozumek/WindowsManager/wiki"
-global homepage = "https://github.com/rozumek/WindowsManager/wiki"
+global version := "1.1.1 Alpha"
+global wiki := "https://github.com/rozumek/WindowsManager/wiki"
+global homepage := "https://github.com/rozumek/WindowsManager/wiki"
  /* 
   * ================================================================================
   */
@@ -69,7 +69,8 @@ Private.App.Tray.Menu
 	.AddSeparatorLine()	
 	.AddMenuItem("Restart Application", "restart_app")
 	.AddMenuItem("Wiki", "see_wiki")
-	.AddMenuItem("About ", "about_app")
+	.AddMenuItem("About", "about_app")
+	.AddMenuItem("Exit", "exit_app")
 
 ; zarejestrowanie standarowyk klawiszy funkcyjnych
 config.SetSection("functions")
@@ -326,8 +327,12 @@ return
 
 about_app:
 	config.SetSection("general")
-	appName := Config.Get("app_name") . " " . version . " - Open source"
+	appName := config.Get("app_name") . " " . version . " - Open source"
 	
 	MsgBox, %appName%`n`nCreated by: `tMarcin Wyrozumski`nPowered by: `tAutoHotKey`nHomepage: `t%homepage%`n`nPlease Share It!!!
+return
+
+exit_app:
+	Rico.App.ExitApp();
 return
 
