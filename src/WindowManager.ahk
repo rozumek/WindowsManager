@@ -79,6 +79,7 @@ Rico.Loader.RegisterHotKey(config.Get("reload.hotkey", "#r"), "manager_relaod")
 Rico.Loader.RegisterHotKey(config.Get("goto.hotkey","#a"), "manager_goto")
 Rico.Loader.RegisterHotKey(config.Get("cursor.hotkey","#w"), "manager_cursor")
 Rico.Loader.RegisterHotKey(config.Get("pwc.hotkey","#q"), "manager_pwc")
+Rico.Loader.RegisterHotKey(config.Get("windows.hotkey","#x"), "manager_windows")
 
 ; ustawienie pozycji monitora głównego domyślnnie lewy
 config.SetSection("cursor")
@@ -177,7 +178,25 @@ return
 /**
  * ===============================================================================
  */
+ 
+ /**
+ * ===============================================================================
+ * Akcje specjalne
+ *
+ * Konfiguracja klawiszy: Windows + Shift + 
+ * ===============================================================================
+ */
+manager_windows:
+	config.SetSection("windows")
 
+	map := Object()
+	map[config.Get("calendar.hotkey","wc")] := "open_windows_calendar"		
+	
+	Rico.Loader.RegisterHotKeysAndWaitForAction(map)
+return
+/**
+ * ===============================================================================
+ */
  
 /**
  * ===============================================================================
@@ -332,7 +351,11 @@ about_app:
 	MsgBox, %appName%`n`nCreated by: `tMarcin Wyrozumski`nPowered by: `tAutoHotKey`nHomepage: `t%homepage%`n`nPlease Share It!!!
 return
 
+open_windows_calendar:
+	Send #t{Tab}{Tab}{Left}{Enter}
+return
+
 exit_app:
-	Rico.App.ExitApp();
+	Rico.App.ExitApp()
 return
 
