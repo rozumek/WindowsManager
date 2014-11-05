@@ -74,6 +74,8 @@ Private.App.Tray.Menu
 ; zarejestrowanie standarowyk klawiszy funkcyjnych
 config.SetSection("functions")
 
+Rico.Loader.RegisterHotKey("+^#r", "restart_app")
+
 Rico.Loader.RegisterHotKey(config.Get("reload.hotkey", "#r"), "manager_relaod")
 Rico.Loader.RegisterHotKey(config.Get("goto.hotkey","#a"), "manager_goto")
 Rico.Loader.RegisterHotKey(config.Get("cursor.hotkey","#w"), "manager_cursor")
