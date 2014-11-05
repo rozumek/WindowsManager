@@ -38,7 +38,7 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
   * Ustawienie wersji
   * ================================================================================
   */
-global version := "1.1.1 Alpha"
+global version := "1.1.1"
 global wiki := "https://github.com/rozumek/WindowsManager/wiki"
 global homepage := "https://github.com/rozumek/WindowsManager/wiki"
  /* 
