@@ -19,7 +19,7 @@
 			 * @param int Option (Available 1 - Info Icon, 2 - Warning Icon, 3 - Error icon)
 			 * @return this
 			 */
-			ShowTip(Title, Description, Seconds := 5, Option := 1) {
+			ShowTip(Title, Description, Seconds = 5, Option = 1) {
 				TrayTip, %Title%, %Description%, %Seconds%, %Option%
 				
 				return this
@@ -271,7 +271,7 @@
 			 * @param string EventsLabel
 			 * @return this
 			 */
-			GetInstance(Width := 0, Height := 0, HeaderColumnNames := "", EventsLabel="") {				
+			GetInstance(Width = 0, Height = 0, HeaderColumnNames = "", EventsLabel="") {				
 				this.Id++
 				
 				;domyslne ustawienie pierwszej kolumny dla kazdego nowego elementu
@@ -403,7 +403,7 @@
 			 * @param int Column
 			 * @return string
 			 */	
-			GetSelectedRowValue(Column:=1) {
+			GetSelectedRowValue(Column=1) {
 				RowNumber := Private.Gui.ListView.GetSelectedRowNumber()							
 				LV_GetText(RowValue, RowNumber, Column)
 				

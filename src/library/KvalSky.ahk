@@ -47,7 +47,7 @@
 				 * @param string Delimiter
 				 * @return array
 				 */
-				Parse(Rowset, Delimiter := ";") {
+				Parse(Rowset, Delimiter = ";") {
 					ResultArray := Object()					
 					
 					for i, element in Rowset {	
@@ -77,7 +77,7 @@
 		/**
 		 * Enum z informacjami o Przeglądarkach
 		 */
-		static Browsers := {chrome : {exe : "chrome.exe"}, ie : {exe : "ie.exe"}, firefox : {exe : "firefox.exe"}, opera : {exe : "opera.exe"}}
+		static Browsers := {chrome : {exe : "chrome.exe"}, ie : {exe : "iexplore.exe"}, firefox : {exe : "firefox.exe"}, opera : {exe : "opera.exe"}}
 		
 		/**
 		 * Enum z informacjami programach

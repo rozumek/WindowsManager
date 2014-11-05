@@ -22,7 +22,6 @@ SetWorkingDir %A_ScriptDir%  	; Ensures a consistent starting directory.
 #Include library\KvalSky.ahk
 #Include library\Private.ahk
 
-#Include library\functions.ahk		;funkcje wykorzystywane w projekcie
 /**
  * ================================================================================
  */
@@ -151,7 +150,8 @@ manager_cursor:
 
 	map := Object()
 	map[config.Get("goto_left_screen.hotkey","#1")] := "goto_left_screen"
-	map[config.Get("goto_right_screen.hotkey","#2")] := "goto_right_screen"
+	map[config.Get("goto_midle_screen.hotkey","#2")] := "goto_midle_screen"
+	map[config.Get("goto_right_screen.hotkey","#3")] := "goto_right_screen"
 	
 	Rico.Loader.RegisterHotKeysAndWaitForAction(map)
 return
@@ -301,15 +301,12 @@ goto_left_screen:
 	Rico.Cursor.MoveToMonitor(1)
 return
 
-goto_right_screen:
+goto_midle_screen:
 	Rico.Cursor.MoveToMonitor(2)
 return
 
-insert_pwc_comment:
-	config.SetSection("general")
-	username := config.Get("username", "User")
-
-	PrintPwcAdditionalInfoComment(username)
+goto_right_screen:
+	Rico.Cursor.MoveToMonitor(3)
 return
 
 show_actions_box:

@@ -61,7 +61,7 @@
 		 * @param mixed|string default
 		 * @return mixed
 		 */
-		Get(inputArray, key, defaultValue := "") {		
+		Get(inputArray, key, defaultValue = "") {		
 			if (this.KeyExist(key, inputArray)) {
 				return inputArray[key]
 			}
@@ -93,7 +93,7 @@
 		 * @param string glue
 		 * @return bool
 		 */
-		Join(inputArray, glue :="") {
+		Join(inputArray, glue ="") {
 			stringResult := ""			
 			iterator := 0
 
@@ -235,7 +235,7 @@
 		 * @param mixed Default
 		 * @retrun string|bool
 		 */
-		Get(Key, Default:="") {
+		Get(Key, Default="") {
 			Section := this.GetSection()
 			FileName := this.GetFileName()
 			IniRead, ConfigVar, %FileName%, %Section%, %Key%, %Default%
@@ -306,7 +306,7 @@
 		MoveToMonitor(monitorId) { 	
 			SysGet, MonitorCount, MonitorCount
 			
-			if (MonitorCount > 1) {
+			if (MonitorCount == 2) {
 				CoordMode, Mouse, Screen
 				
 				if (Rico.Window.GetMainScreenPosition() == "right") {
@@ -333,6 +333,52 @@
 						MouseMove, -leftMonitorCenterX, leftMonitorCenterY
 					} else {
 						MouseMove, leftMonitorCenterX, leftMonitorCenterY
+					}
+				}
+			}
+			
+			if (MonitorCount == 3) {
+				CoordMode, Mouse, Screen
+				
+				/**
+				 * @TODO move to configuration
+				 */
+				SysGet, MonitorL, Monitor, 3
+				SysGet, MonitorM, Monitor, 1
+				SysGet, MonitorR, Monitor, 2
+											
+				leftMonitorCenterX := (MonitorLRight - MonitorLLeft)/2
+				leftMonitorCenterY := (MonitorLBottom - MonitorLTop)/2
+				
+				midleMonitorCenterX := (MonitorMRight - MonitorMLeft)/2
+				midleMonitorCenterY := (MonitorMBottom - MonitorMTop)/2
+				
+				rightMonitorCenterX := (MonitorRRight - MonitorRLeft)/2
+				rightMonitorCenterY := (MonitorRBottom - MonitorRTop)/2
+			
+				if (monitorId = 3) {	
+					if (Rico.Window.GetMainScreenPosition() == "left") {						
+						MouseMove, MonitorLRight+MonitorMRight+rightMonitorCenterX, rightMonitorCenterY
+					} else if(Rico.Window.GetMainScreenPosition() == "midle"){	
+						MouseMove, MonitorMRight+rightMonitorCenterX, rightMonitorCenterY
+					} else if(Rico.Window.GetMainScreenPosition() == "right"){
+						MouseMove, rightMonitorCenterX, rightMonitorCenterY
+					}
+				} else if(monitorId = 2) {	
+					if (Rico.Window.GetMainScreenPosition() == "left") {
+						MouseMove, MonitorLRight+midleMonitorCenterX, midleMonitorCenterY
+					} else if(Rico.Window.GetMainScreenPosition() == "midle"){	
+						MouseMove, midleMonitorCenterX, midleMonitorCenterY
+					} else if(Rico.Window.GetMainScreenPosition() == "right"){
+						MouseMove, -MonitorRRight+midleMonitorCenterX, midleMonitorCenterY						
+					}
+				} else if(monitorId = 1) {		
+					if (Rico.Window.GetMainScreenPosition() == "left") {
+						MouseMove, leftMonitorCenterX, leftMonitorCenterY						
+					} else if(Rico.Window.GetMainScreenPosition() == "midle"){	
+						MouseMove, -leftMonitorCenterX, leftMonitorCenterY
+					} else if(Rico.Window.GetMainScreenPosition() == "right"){
+						MouseMove, -MonitorMRight-leftMonitorCenterX, leftMonitorCenterY
 					}
 				}
 			}
@@ -417,7 +463,7 @@
 		 * @param string FileName
 		 * @return this
 		 */
-		ReadLines(FileName := "") {
+		ReadLines(FileName = "") {
 			this.Flush()
 			
 			if(FileName == "") {
@@ -536,7 +582,7 @@
 		/**
 		 * Funckja rejestrujaca map klawiszy do makr, czekająca zadany okres czasu na akcje oraz odrejestowujaca
 		 */
-		RegisterHotKeysAndWaitForAction(map, waitTime := 1000, specialKey := "#") {
+		RegisterHotKeysAndWaitForAction(map, waitTime = 1000, specialKey = "#") {
 			this.RegisterHotKeys(map)
 
 			KeyWait, %specialKey%
@@ -649,7 +695,7 @@
 		/**
 		 * Funkcja przeładowujaca stronę
 		 */
-		ReloadPage(autoAccept := false) {
+		ReloadPage(autoAccept = false) {
 			Send ^r	
 			
 			if(autoAccept == true) {				
@@ -662,7 +708,7 @@
 		 *
 		 * @param string browser
 		 */
-		RefreshBrowser(window, autoAccept := false) {
+		RefreshBrowser(window, autoAccept = false) {
 			if this.GotoWindow(window) {
 				this.ReloadPage(autoAccept)
 			}
@@ -684,7 +730,7 @@
 		 * @param string browser
 		 * @return bool
 		 */
-		GotoWindow(window, extended := false, forceMaximize := true, ahkType := "ahk_exe") {
+		GotoWindow(window, extended = false, forceMaximize = true, ahkType = "ahk_exe") {
 			if WinExist(ahkType . " " . window){				
 				if (extended == true) {
 					WinGet, windowList, List	
