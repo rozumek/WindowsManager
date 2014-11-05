@@ -82,7 +82,7 @@
 		/**
 		 * Enum z informacjami programach
 		 */
-		static Programs := {commander : {exe : "TOTALCMD64.exe", class : "TTOTAL_CMD"}, putty : {exe : "putty.exe", class : "PuTTY"}, outlook : {exe : "OUTLOOK.EXE", class : "rctrl_renwnd32"}, phpstorm : {exe : "PhpStorm.exe", class : "SunAwtFrame"}, skype : {exe : "Skype.exe", class : "tSkMainForm"}, notepadpp : {exe : "notepad++.exe", class : "Notepad++"}, tortoise :{exe : "", class : "#32770"}, netbeans : {exe : "netbeans.exe", class : "SunAwtFrame"}}				
+		static Programs := {commander : {exe : "TOTALCMD64.exe", class : "TTOTAL_CMD"}, putty : {exe : "putty.exe", class : "PuTTY"}, outlook : {exe : "OUTLOOK.EXE", class : "rctrl_renwnd32"}, phpstorm : {exe : "PhpStorm.exe", class : "SunAwtFrame"}, skype : {exe : "Skype.exe", class : "tSkMainForm"}, notepadpp : {exe : "notepad++.exe", class : "Notepad++"}, tortoise :{exe : "", class : "#32770"}, netbeans : {exe : "netbeans.exe", class : "SunAwtFrame"}, conemu : {exe : "ConEmu64.exe"}, navicat : {exe : "navicat.exe"}}
 	}
 }
 
