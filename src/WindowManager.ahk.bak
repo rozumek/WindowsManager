@@ -35,17 +35,7 @@ application
 	.Run()
 
 
-/**
- * ================================================================================
- * Setting global data
- * ================================================================================
- */
-global config := application.config
-global wiki := application.wiki
-global version := application.version
 
-global browsers := KvalSky.Enum.Browsers
-global programs := KvalSky.Enum.Programs
 
 /**
  * ========================================================r=======================
