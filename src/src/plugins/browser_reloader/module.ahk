@@ -1,8 +1,7 @@
-; zarejestrowanie standarowyk klawiszy funkcyjnych
-config.SetSection("functions")
 Rico.Loader.RegisterHotKey(config.Get("reload.hotkey", "#r"), "manager_relaod")
 
 BrowserReloader() {
+
 	
 	/**
 	 * ========================================================r=======================

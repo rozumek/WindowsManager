@@ -1,4 +1,4 @@
-class Application {
+class Bootstrap {
 
 	version := "1.2.0 Alpha"
 	wiki := "https://github.com/rozumek/WindowsManager/wiki"
@@ -7,7 +7,7 @@ class Application {
 	programs := {}
 	config := {}
 	
-	Bootstrap() {
+	__New() {
 		
 		this.browsers := KvalSky.Enum.Browsers
 		this.programs := KvalSky.Enum.Programs

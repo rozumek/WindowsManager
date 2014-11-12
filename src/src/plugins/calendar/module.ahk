@@ -2,7 +2,7 @@
 config.SetSection("functions")
 Rico.Loader.RegisterHotKey(config.Get("windows.hotkey","#x"), "manager_windows")
 
-Calendard() {
+Calendar() {
 	 /**
 	 * ===============================================================================
 	 * Akcje specjalne

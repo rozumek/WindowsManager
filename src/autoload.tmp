@@ -1,0 +1,6 @@
+#Include src\plugins\core\module.ahk
+#Include src\plugins\browser_reloader\module.ahk
+#Include src\plugins\app_goto\module.ahk
+#Include src\plugins\cursor_manager\module.ahk
+#Include src\plugins\calendar\module.ahk
+#Include src\plugins\popup\module.ahk
